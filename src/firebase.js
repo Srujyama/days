@@ -2,12 +2,12 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  projectId: "days-todo-68490",
-  appId: "1:873274882928:web:36535b55933a9c2f1eadb5",
-  storageBucket: "days-todo-68490.firebasestorage.app",
+  projectId: "days-todo-app",
+  appId: "1:380911256336:web:d556dc074c7b68210c9b95",
+  storageBucket: "days-todo-app.firebasestorage.app",
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: "days-todo-68490.firebaseapp.com",
-  messagingSenderId: "873274882928",
+  authDomain: "days-todo-app.firebaseapp.com",
+  messagingSenderId: "380911256336",
 };
 
 const app = initializeApp(firebaseConfig);
