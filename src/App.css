@@ -4,67 +4,289 @@
   box-sizing: border-box;
 }
 
-body {
-  background: #0a0a0a;
-  color: #e0e0e0;
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+:root {
+  --black: #000;
+  --bg: #0a0a0a;
+  --surface: #111;
+  --border: #1e1e1e;
+  --border-hover: #333;
+  --text: #d4d4d4;
+  --text-muted: #555;
+  --text-faint: #333;
+  --white: #f5f5f0;
+  --gold: #c9a96e;
+  --gold-dim: #8a7345;
+  --green: #6b8f71;
+  --blue: #7a9cbf;
+  --amber: #c9a96e;
+  --red: #a05050;
+  --serif: "Cormorant Garamond", "Times New Roman", serif;
+  --sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Login page ──────────────────────── */
+
+.login-page {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 380px;
+  text-align: center;
+}
+
+.login-brand h1 {
+  font-family: var(--serif);
+  font-size: 3.5rem;
+  font-weight: 300;
+  letter-spacing: 0.35em;
+  color: var(--white);
+  margin-bottom: 16px;
+}
+
+.login-divider {
+  width: 40px;
+  height: 1px;
+  background: var(--gold);
+  margin: 0 auto 16px;
+}
+
+.login-brand p {
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 48px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.login-form input {
+  width: 100%;
+  background: transparent;
+  border: 1px solid var(--border);
+  padding: 14px 16px;
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.login-form input:focus {
+  border-color: var(--gold-dim);
+}
+
+.login-form input::placeholder {
+  color: var(--text-faint);
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+}
+
+.login-error {
+  color: var(--red);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+.login-btn-primary {
+  width: 100%;
+  background: var(--white);
+  color: var(--black);
+  border: none;
+  padding: 14px;
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: opacity 0.3s;
+  margin-top: 4px;
+}
+
+.login-btn-primary:hover {
+  opacity: 0.85;
+}
+
+.login-separator {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 28px 0;
+}
+
+.login-separator::before,
+.login-separator::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.login-separator span {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.login-btn-google {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: transparent;
+  border: 1px solid var(--border);
+  padding: 13px;
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+.login-btn-google:hover {
+  border-color: var(--border-hover);
+}
+
+.login-toggle {
+  margin-top: 32px;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+.login-toggle button {
+  background: none;
+  border: none;
+  color: var(--gold);
+  font-size: 0.7rem;
+  cursor: pointer;
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  transition: opacity 0.3s;
+}
+
+.login-toggle button:hover {
+  opacity: 0.7;
+}
+
+/* ── App layout ──────────────────────── */
+
 .app {
-  max-width: 500px;
+  max-width: 520px;
   margin: 0 auto;
-  padding: 60px 20px;
+  padding: 60px 24px 80px;
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 48px;
 }
 
 h1 {
-  font-size: 2.5rem;
+  font-family: var(--serif);
+  font-size: 2.8rem;
   font-weight: 300;
-  letter-spacing: -0.02em;
-  color: #fff;
+  letter-spacing: 0.3em;
+  color: var(--white);
 }
 
 .subtitle {
-  color: #666;
-  font-size: 0.9rem;
-  margin-bottom: 40px;
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 4px;
 }
 
-/* ── Add form ─────────────────────── */
+.logout-btn {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-family: var(--sans);
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 8px;
+}
+
+.logout-btn:hover {
+  border-color: var(--border-hover);
+  color: var(--text);
+}
+
+/* ── Add form ────────────────────────── */
 
 .add-form {
-  margin-bottom: 32px;
+  margin-bottom: 40px;
 }
 
 .add-main {
   display: flex;
-  gap: 8px;
+  gap: 0;
 }
 
 .add-main input {
   flex: 1;
-  background: #141414;
-  border: 1px solid #222;
-  border-radius: 8px;
-  padding: 12px 16px;
-  color: #e0e0e0;
-  font-size: 0.95rem;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-right: none;
+  padding: 14px 18px;
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
   outline: none;
-  transition: border-color 0.2s;
+  transition: border-color 0.3s;
 }
 
 .add-main input:focus {
-  border-color: #444;
+  border-color: var(--gold-dim);
+}
+
+.add-main input::placeholder {
+  color: var(--text-faint);
 }
 
 .add-main button {
-  background: #fff;
-  color: #000;
-  border: none;
-  border-radius: 8px;
-  width: 44px;
+  background: var(--white);
+  color: var(--black);
+  border: 1px solid var(--white);
+  width: 48px;
   font-size: 1.2rem;
+  font-weight: 300;
   cursor: pointer;
-  transition: opacity 0.2s;
+  transition: opacity 0.3s;
+  flex-shrink: 0;
 }
 
 .add-main button:hover {
@@ -72,72 +294,84 @@ h1 {
 }
 
 .add-options {
-  margin-top: 10px;
+  margin-top: 12px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
-/* ── Type picker ──────────────────── */
+/* ── Type picker ─────────────────────── */
 
 .type-picker {
   display: flex;
-  gap: 4px;
+  gap: 0;
 }
 
 .type-btn {
-  background: #141414;
-  border: 1px solid #222;
-  border-radius: 6px;
-  color: #666;
-  padding: 5px 12px;
-  font-size: 0.8rem;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  padding: 7px 16px;
+  font-family: var(--sans);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   cursor: pointer;
-  transition: all 0.15s;
+  transition: all 0.3s;
+}
+
+.type-btn + .type-btn {
+  border-left: none;
 }
 
 .type-btn:hover {
-  color: #aaa;
-  border-color: #333;
+  color: var(--text);
+  border-color: var(--border-hover);
 }
 
 .type-btn.active {
-  background: #1a1a1a;
-  color: #fff;
-  border-color: #444;
+  background: var(--white);
+  color: var(--black);
+  border-color: var(--white);
 }
 
-/* ── Weekday picker ───────────────── */
+.type-btn.active + .type-btn {
+  border-left: none;
+}
+
+/* ── Weekday picker ──────────────────── */
 
 .weekday-picker {
   display: flex;
-  gap: 4px;
+  gap: 6px;
 }
 
 .day-btn {
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  border: 1px solid #222;
-  background: #141414;
-  color: #666;
-  font-size: 0.75rem;
+  width: 36px;
+  height: 36px;
+  border-radius: 0;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  font-family: var(--sans);
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
   cursor: pointer;
-  transition: all 0.15s;
+  transition: all 0.3s;
 }
 
 .day-btn:hover {
-  border-color: #444;
-  color: #aaa;
+  border-color: var(--border-hover);
+  color: var(--text);
 }
 
 .day-btn.active {
-  background: #4ade80;
-  color: #000;
-  border-color: #4ade80;
+  background: var(--gold);
+  color: var(--black);
+  border-color: var(--gold);
 }
 
-/* ── Schedule picker ──────────────── */
+/* ── Schedule picker ─────────────────── */
 
 .schedule-picker {
   display: flex;
@@ -145,133 +379,143 @@ h1 {
 }
 
 .schedule-picker input {
-  background: #141414;
-  border: 1px solid #222;
-  border-radius: 6px;
-  color: #e0e0e0;
-  padding: 6px 10px;
-  font-size: 0.85rem;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 8px 12px;
+  font-family: var(--sans);
+  font-size: 0.8rem;
   outline: none;
-  transition: border-color 0.2s;
+  transition: border-color 0.3s;
 }
 
 .schedule-picker input:focus {
-  border-color: #444;
+  border-color: var(--gold-dim);
 }
 
-/* ── Sections ─────────────────────── */
+/* ── Sections ────────────────────────── */
 
 .section-title {
-  font-size: 0.75rem;
+  font-family: var(--serif);
+  font-size: 1rem;
   font-weight: 400;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: #444;
-  margin: 32px 0 8px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid #1a1a1a;
+  color: var(--text-muted);
+  margin: 40px 0 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
 }
 
 .upcoming {
-  opacity: 0.5;
-  transition: opacity 0.2s;
+  opacity: 0.45;
+  transition: opacity 0.3s;
 }
 
 .upcoming:hover {
   opacity: 0.8;
 }
 
-/* ── Todo list ────────────────────── */
+/* ── Todo list ───────────────────────── */
 
 .todo-list {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 0;
 }
 
 .todo-list li {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px 8px;
-  border-radius: 8px;
-  transition: background 0.15s;
+  gap: 14px;
+  padding: 16px 8px;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.3s;
+}
+
+.todo-list li:last-child {
+  border-bottom: none;
 }
 
 .todo-list li:hover {
-  background: #141414;
+  background: rgba(255, 255, 255, 0.015);
 }
 
 .todo-list li.done .todo-text {
   text-decoration: line-through;
-  color: #444;
+  color: var(--text-faint);
 }
 
 .check-btn {
   background: none;
   border: none;
-  color: #555;
-  font-size: 1.1rem;
+  color: var(--text-muted);
+  font-size: 1rem;
   cursor: pointer;
   padding: 0;
-  width: 24px;
+  width: 20px;
   flex-shrink: 0;
-  transition: color 0.2s;
+  transition: color 0.3s;
 }
 
 .check-btn:hover {
-  color: #fff;
+  color: var(--white);
 }
 
 li.done .check-btn {
-  color: #4ade80;
+  color: var(--gold);
 }
 
 .todo-text {
   flex: 1;
   cursor: pointer;
-  font-size: 0.95rem;
-  transition: color 0.2s;
+  font-size: 0.9rem;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  transition: color 0.3s;
 }
 
 .todo-text:hover {
-  color: #fff;
+  color: var(--white);
 }
 
-/* ── Badges ───────────────────────── */
+/* ── Badges ──────────────────────────── */
 
 .badge {
-  font-size: 0.7rem;
-  color: #555;
+  font-family: var(--sans);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
   flex-shrink: 0;
   white-space: nowrap;
 }
 
 .badge-daily {
-  color: #4ade80;
+  color: var(--green);
 }
 
 .badge-weekly {
-  color: #60a5fa;
+  color: var(--blue);
 }
 
 .badge-scheduled {
-  color: #fbbf24;
+  color: var(--amber);
 }
 
-/* ── Delete button ────────────────── */
+/* ── Delete button ───────────────────── */
 
 .delete-btn {
   background: none;
   border: none;
-  color: #333;
-  font-size: 1.1rem;
+  color: var(--text-faint);
+  font-size: 0.9rem;
   cursor: pointer;
   padding: 0 4px;
   flex-shrink: 0;
   opacity: 0;
-  transition: opacity 0.2s, color 0.2s;
+  transition: opacity 0.3s, color 0.3s;
 }
 
 .todo-list li:hover .delete-btn {
@@ -279,10 +523,10 @@ li.done .check-btn {
 }
 
 .delete-btn:hover {
-  color: #f87171;
+  color: var(--red);
 }
 
-/* ── Edit row ─────────────────────── */
+/* ── Edit row ────────────────────────── */
 
 .edit-row {
   display: flex;
@@ -293,41 +537,57 @@ li.done .check-btn {
 
 .edit-row input {
   flex: 1;
-  background: #1a1a1a;
-  border: 1px solid #333;
-  border-radius: 6px;
-  padding: 8px 12px;
-  color: #e0e0e0;
-  font-size: 0.95rem;
+  background: transparent;
+  border: 1px solid var(--border);
+  padding: 10px 14px;
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  font-weight: 300;
   outline: none;
+  transition: border-color 0.3s;
 }
 
 .edit-row input:focus {
-  border-color: #555;
+  border-color: var(--gold-dim);
 }
 
 .save-btn {
-  background: #4ade80;
-  color: #000;
+  background: var(--gold);
+  color: var(--black);
   border: none;
-  border-radius: 6px;
-  padding: 6px 12px;
-  font-size: 0.8rem;
+  padding: 8px 16px;
+  font-family: var(--sans);
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
   cursor: pointer;
   font-weight: 500;
+  transition: opacity 0.3s;
+}
+
+.save-btn:hover {
+  opacity: 0.8;
 }
 
 .cancel-btn {
   background: none;
   border: none;
-  color: #666;
-  font-size: 1.2rem;
+  color: var(--text-muted);
+  font-size: 1rem;
   cursor: pointer;
+  transition: color 0.3s;
+}
+
+.cancel-btn:hover {
+  color: var(--text);
 }
 
 .empty {
   text-align: center;
-  color: #333;
-  margin-top: 60px;
-  font-size: 0.9rem;
+  color: var(--text-faint);
+  margin-top: 80px;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
 }

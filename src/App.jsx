@@ -9,23 +9,32 @@ import {
   serverTimestamp,
   query,
   orderBy,
+  where,
 } from "firebase/firestore";
 import { db } from "./firebase";
+import { useAuth } from "./AuthContext";
 import { getTodayStr, isTaskActiveToday, isTaskDoneToday } from "./dateUtils";
 import AddTask from "./AddTask";
 import TaskItem from "./TaskItem";
+import Login from "./Login";
 import "./App.css";
 
 function App() {
+  const { user, logout } = useAuth();
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {
-    const q = query(collection(db, "todos"), orderBy("createdAt", "desc"));
+    if (!user) return;
+    const q = query(
+      collection(db, "todos"),
+      where("uid", "==", user.uid),
+      orderBy("createdAt", "desc")
+    );
     const unsub = onSnapshot(q, (snapshot) => {
       setTodos(snapshot.docs.map((d) => ({ id: d.id, ...d.data() })));
     });
     return unsub;
-  }, []);
+  }, [user]);
 
   const { todayTasks, upcomingTasks } = useMemo(() => {
     const today = [];
@@ -45,6 +54,7 @@ function App() {
       text: taskData.text,
       type: taskData.type,
       done: false,
+      uid: user.uid,
       createdAt: serverTimestamp(),
     };
 
@@ -84,16 +94,25 @@ function App() {
     await deleteDoc(doc(db, "todos", id));
   };
 
+  if (!user) return <Login />;
+
   return (
     <div className="app">
-      <h1>days</h1>
-      <p className="subtitle">stuff i need to do</p>
+      <header className="app-header">
+        <div>
+          <h1>DAYS</h1>
+          <p className="subtitle">your daily ritual</p>
+        </div>
+        <button className="logout-btn" onClick={logout}>
+          Sign Out
+        </button>
+      </header>
 
       <AddTask onAdd={handleAdd} />
 
       {todayTasks.length > 0 && (
         <section>
-          <h2 className="section-title">today</h2>
+          <h2 className="section-title">Today</h2>
           <ul className="todo-list">
             {todayTasks.map((task) => (
               <TaskItem
@@ -110,7 +129,7 @@ function App() {
 
       {upcomingTasks.length > 0 && (
         <section className="upcoming">
-          <h2 className="section-title">upcoming</h2>
+          <h2 className="section-title">Upcoming</h2>
           <ul className="todo-list">
             {upcomingTasks.map((task) => (
               <TaskItem
@@ -126,7 +145,7 @@ function App() {
       )}
 
       {todos.length === 0 && (
-        <p className="empty">nothing yet. add something above.</p>
+        <p className="empty">Nothing yet. Add something above.</p>
       )}
     </div>
   );
