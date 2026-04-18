@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const TYPES = ["once", "daily", "weekly", "scheduled"];
+const TYPES = ["once", "daily", "every", "weekly", "scheduled"];
 const DAYS = ["S", "M", "T", "W", "T", "F", "S"];
 
 function AddTask({ onAdd }) {
@@ -9,6 +9,7 @@ function AddTask({ onAdd }) {
   const [weekdays, setWeekdays] = useState([]);
   const [scheduledDate, setScheduledDate] = useState("");
   const [scheduledTime, setScheduledTime] = useState("");
+  const [intervalDays, setIntervalDays] = useState(2);
 
   const toggleDay = (dayIndex) => {
     setWeekdays((prev) =>
@@ -30,6 +31,11 @@ function AddTask({ onAdd }) {
       task.weekdays = weekdays;
     }
 
+    if (type === "every") {
+      if (intervalDays < 1) return;
+      task.intervalDays = intervalDays;
+    }
+
     if (type === "scheduled") {
       if (!scheduledDate) return;
       task.scheduledDate = scheduledDate;
@@ -42,6 +48,7 @@ function AddTask({ onAdd }) {
     setWeekdays([]);
     setScheduledDate("");
     setScheduledTime("");
+    setIntervalDays(2);
   };
 
   return (
@@ -70,6 +77,20 @@ function AddTask({ onAdd }) {
             </button>
           ))}
         </div>
+
+        {type === "every" && (
+          <div className="interval-picker">
+            <span className="interval-label">every</span>
+            <input
+              type="number"
+              min="1"
+              value={intervalDays}
+              onChange={(e) => setIntervalDays(parseInt(e.target.value) || 1)}
+              className="interval-input"
+            />
+            <span className="interval-label">days</span>
+          </div>
+        )}
 
         {type === "weekly" && (
           <div className="weekday-picker">

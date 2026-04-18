@@ -23,6 +23,8 @@ function TaskItem({ task, onToggle, onEdit, onDelete }) {
     switch (type) {
       case "daily":
         return <span className="badge badge-daily">↻ daily</span>;
+      case "every":
+        return <span className="badge badge-every">↻ every {task.intervalDays}d</span>;
       case "weekly":
         return <span className="badge badge-weekly">↻ {formatWeekdays(task.weekdays)}</span>;
       case "scheduled":

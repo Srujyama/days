@@ -8,6 +8,12 @@ export function getDayOfWeek() {
   return new Date().getDay(); // 0=Sun, 6=Sat
 }
 
+function daysBetween(dateStrA, dateStrB) {
+  const a = new Date(dateStrA + "T00:00:00");
+  const b = new Date(dateStrB + "T00:00:00");
+  return Math.floor((b - a) / (1000 * 60 * 60 * 24));
+}
+
 export function isTaskActiveToday(task) {
   const type = task.type || "once";
   const today = getTodayStr();
@@ -18,6 +24,12 @@ export function isTaskActiveToday(task) {
       return true;
     case "daily":
       return true;
+    case "every": {
+      const last = task.lastCompletedDate;
+      if (!last) return true;
+      const elapsed = daysBetween(last, today);
+      return elapsed >= (task.intervalDays || 1);
+    }
     case "weekly":
       return (task.weekdays || []).includes(dow);
     case "scheduled":
@@ -34,6 +46,8 @@ export function isTaskDoneToday(task) {
   switch (type) {
     case "daily":
     case "weekly":
+      return task.lastCompletedDate === today;
+    case "every":
       return task.lastCompletedDate === today;
     case "once":
     case "scheduled":

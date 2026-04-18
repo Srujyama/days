@@ -339,6 +339,45 @@ h1 {
   border-left: none;
 }
 
+/* ── Interval picker ─────────────────── */
+
+.interval-picker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.interval-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.interval-input {
+  width: 52px;
+  background: transparent;
+  border: 1px solid var(--border);
+  padding: 7px 10px;
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  text-align: center;
+  outline: none;
+  transition: border-color 0.3s;
+  -moz-appearance: textfield;
+}
+
+.interval-input::-webkit-inner-spin-button,
+.interval-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.interval-input:focus {
+  border-color: var(--gold-dim);
+}
+
 /* ── Weekday picker ──────────────────── */
 
 .weekday-picker {
@@ -494,6 +533,10 @@ li.done .check-btn {
 
 .badge-daily {
   color: var(--green);
+}
+
+.badge-every {
+  color: #9b8ec4;
 }
 
 .badge-weekly {

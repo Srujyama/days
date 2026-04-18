@@ -58,8 +58,11 @@ function App() {
       createdAt: serverTimestamp(),
     };
 
-    if (taskData.type === "daily" || taskData.type === "weekly") {
+    if (taskData.type === "daily" || taskData.type === "weekly" || taskData.type === "every") {
       docData.lastCompletedDate = "";
+    }
+    if (taskData.type === "every") {
+      docData.intervalDays = taskData.intervalDays;
     }
     if (taskData.type === "weekly") {
       docData.weekdays = taskData.weekdays;
@@ -76,7 +79,7 @@ function App() {
     const type = task.type || "once";
     const done = isTaskDoneToday(task);
 
-    if (type === "daily" || type === "weekly") {
+    if (type === "daily" || type === "weekly" || type === "every") {
       await updateDoc(doc(db, "todos", task.id), {
         done: !done,
         lastCompletedDate: done ? "" : getTodayStr(),
